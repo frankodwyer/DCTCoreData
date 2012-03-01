@@ -189,13 +189,13 @@
 			[objectIDs addObject:[mo objectID]];
 	}
 	
-	NSManagedObjectContext *threadedContext = [[NSManagedObjectContext alloc] init];
-	[threadedContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
-	
 	dispatch_queue_t asyncQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	
 	dispatch_async(asyncQueue, ^{
 		
+        NSManagedObjectContext *threadedContext = [[NSManagedObjectContext alloc] init];
+        [threadedContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+        
 		NSArray *threadedObjects = nil;
 		if (objectIDs) {
 			NSMutableArray *array = [NSMutableArray arrayWithCapacity:[objectIDs count]];
@@ -246,13 +246,13 @@
 				   withCallbackQueue:(dispatch_queue_t)callbackQueue
 							   block:(DCTFetchRequestCallbackBlock)callbackBlock {
 	
-	NSManagedObjectContext *threadedContext = [[NSManagedObjectContext alloc] init];
-	[threadedContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
-	
 	dispatch_queue_t asyncQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	
 	dispatch_async(asyncQueue, ^{
 		
+        NSManagedObjectContext *threadedContext = [[NSManagedObjectContext alloc] init];
+        [threadedContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+        
 		NSError *error = nil;
 		NSArray *array = [threadedContext executeFetchRequest:fetchRequest error:&error];
 		
